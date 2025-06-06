@@ -48,14 +48,62 @@
       "uploaded": "2025-04-22T19:09:41+03:00",
       "url": "deb/com.tigisoftware.filza_4.0.1-2_iphoneos-arm64.deb"
     },
-    {
-      "name": "Talking Tom v1.0 iOS3.0 C.ipa",
-      "size": 14545957,
-      "type": "ipa",
-      "modified": "2025-05-22 19:19:11",
-      "uploaded": "2025-04-21T21:48:09+03:00",
-      "url": "ipa/Talking Tom v1.0 iOS3.0 C.ipa"
-    },
+"name": 
+"CyPwn Store",
+3
+"bundleIdentifier": 
+"Ed0ardo.CyPwnStore",
+4
+"marketplaceID": 
+"",
+5
+"developerName": 
+"Example Developer",
+6
+"subtitle": 
+"An awesome app.",
+7
+"localizedDescription": 
+"This is an awesome app only available on AltStore.",
+8
+"iconURL": 
+"https://i.imgur.com/Hoe0GQM.png",
+9
+"tintColor": 
+"#000000",
+10
+"category": 
+"other",
+11
+"screenshots": 
+[
+12
+"https://i.imgur.com/NLNZkeA.jpeg"
+13
+],
+14
+"versions": 
+[
+15
+],
+16
+"appPermissions": 
+{
+17
+"entitlements": 
+[...],
+19
+"privacy": 
+{...}
+21
+},
+22
+"patreon": 
+{
+23
+}
+24
+}
     {
       "name": "ai.akemi.appsyncunified_116.0_iphoneos-arm.akemi-git-235aca6cddfbdc9fa87fcb5b2aec2df37ed6d65a.deb",
       "size": 51658,
