@@ -53,7 +53,7 @@ async function fetchFiles() {
         
         for (const dir of directories) {
             try {
-                const response = await fetch(`https://api.github.com/repos/andres9890/ipa-archive/contents/${dir}`);
+                const response = await fetch(`https://api.github.com/repos/v505k/arab/contents/${dir}`);
                 
                 if (response.ok) {
                     const files = await response.json();
