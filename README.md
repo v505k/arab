@@ -1,3 +1,3 @@
-### https://arab.github.io/
+arab.github.io
 -----------------------------------------------
 pretty simple IPA/DEB/DYLIB archive
