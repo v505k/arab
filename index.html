@@ -1,405 +1,25 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="er">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>أرشيف ARAB IPA/DEB</title>
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📱</text></svg>">
-    <style>
-        :root {
-            --primary-color: #3498db;
-            --secondary-color: #2ecc71;
-            --text-color: #333;
-            --bg-color: #f5f7fa;
-            --card-bg: #ffffff;
-            --header-bg: #2c3e50;
-            --footer-bg: #2c3e50;
-            --border-color: #e0e0e0;
-            --shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-            --transition: all 0.3s ease;
-        }
-
-        .dark-mode {
-            --primary-color: #4da6ff;
-            --secondary-color: #00cc99;
-            --text-color: #f0f0f0;
-            --bg-color: #1a1a2e;
-            --card-bg: #16213e;
-            --header-bg: #0f3460;
-            --footer-bg: #0f3460;
-            --border-color: #2a2a4a;
-            --shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: var(--bg-color);
-            color: var(--text-color);
-            line-height: 1.6;
-            transition: var(--transition);
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-        }
-
-        header {
-            background-color: var(--header-bg);
-            color: white;
-            padding: 1.5rem;
-            text-align: center;
-            position: relative;
-            box-shadow: var(--shadow);
-        }
-
-        .header-content {
-            max-width: 1200px;
-            margin: 0 auto;
-            position: relative;
-        }
-
-        .theme-toggle {
-            position: absolute;
-            left: 1rem;
-            top: 50%;
-            transform: translateY(-50%);
-            background: rgba(255, 255, 255, 0.15);
-            border: none;
-            border-radius: 50%;
-            width: 40px;
-            height: 40px;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: var(--transition);
-        }
-
-        .theme-toggle:hover {
-            background: rgba(255, 255, 255, 0.25);
-        }
-
-        h1 {
-            font-size: 1.8rem;
-            margin-bottom: 0.5rem;
-        }
-
-        header p {
-            font-size: 1rem;
-            opacity: 0.9;
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 2rem auto;
-            padding: 0 1.5rem;
-            flex: 1;
-            width: 100%;
-        }
-
-        .filter-container {
-            background-color: var(--card-bg);
-            border-radius: 12px;
-            padding: 1.5rem;
-            margin-bottom: 2rem;
-            box-shadow: var(--shadow);
-        }
-
-        .search-container {
-            margin-bottom: 1.5rem;
-        }
-
-        #searchInput {
-            width: 100%;
-            padding: 0.8rem 1rem;
-            border: 1px solid var(--border-color);
-            border-radius: 8px;
-            font-size: 1rem;
-            background-color: var(--card-bg);
-            color: var(--text-color);
-            transition: var(--transition);
-        }
-
-        #searchInput:focus {
-            outline: none;
-            border-color: var(--primary-color);
-            box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.2);
-        }
-
-        .file-type-filter {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.8rem;
-        }
-
-        .filter-btn {
-            padding: 0.6rem 1.2rem;
-            border: none;
-            border-radius: 30px;
-            background-color: #e0e0e0;
-            color: #555;
-            cursor: pointer;
-            font-weight: 600;
-            transition: var(--transition);
-        }
-
-        .filter-btn.active, .filter-btn:hover {
-            background-color: var(--primary-color);
-            color: white;
-        }
-
-        .archive-stats {
-            display: flex;
-            justify-content: space-between;
-            background-color: var(--card-bg);
-            border-radius: 12px;
-            padding: 1.2rem 1.5rem;
-            margin-bottom: 2rem;
-            box-shadow: var(--shadow);
-            flex-wrap: wrap;
-            gap: 1rem;
-        }
-
-        .stat-item {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            font-size: 1rem;
-        }
-
-        .stat-item span:first-child {
-            font-weight: 600;
-        }
-
-        .files-container {
-            background-color: var(--card-bg);
-            border-radius: 12px;
-            padding: 1.5rem;
-            margin-bottom: 2rem;
-            box-shadow: var(--shadow);
-        }
-
-        .files-container h2 {
-            margin-bottom: 1.2rem;
-            padding-bottom: 0.8rem;
-            border-bottom: 2px solid var(--primary-color);
-            font-size: 1.5rem;
-        }
-
-        .file-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 1.5rem;
-        }
-
-        .file-card {
-            background: linear-gradient(145deg, var(--card-bg), #f0f0f0);
-            border-radius: 12px;
-            overflow: hidden;
-            transition: var(--transition);
-            border: 1px solid var(--border-color);
-            box-shadow: var(--shadow);
-        }
-
-        .dark-mode .file-card {
-            background: linear-gradient(145deg, var(--card-bg), #1f1f3d);
-        }
-
-        .file-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
-        }
-
-        .file-icon {
-            height: 80px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: linear-gradient(135deg, var(--primary-color), #2980b9);
-            font-size: 2.5rem;
-            color: white;
-        }
-
-        .file-info {
-            padding: 1.2rem;
-        }
-
-        .file-name {
-            font-weight: 700;
-            font-size: 1.1rem;
-            margin-bottom: 0.5rem;
-            color: var(--text-color);
-        }
-
-        .file-meta {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 1rem;
-            font-size: 0.9rem;
-            color: #777;
-        }
-
-        .dark-mode .file-meta {
-            color: #aaa;
-        }
-
-        .file-type {
-            padding: 0.2rem 0.6rem;
-            border-radius: 4px;
-            font-weight: 600;
-            font-size: 0.8rem;
-            text-transform: uppercase;
-        }
-
-        .file-type.ipa {
-            background-color: rgba(52, 152, 219, 0.15);
-            color: var(--primary-color);
-        }
-
-        .file-type.deb {
-            background-color: rgba(46, 204, 113, 0.15);
-            color: var(--secondary-color);
-        }
-
-        .file-type.dylib {
-            background-color: rgba(155, 89, 182, 0.15);
-            color: #9b59b6;
-        }
-
-        .download-btn {
-            display: block;
-            width: 100%;
-            padding: 0.7rem;
-            background-color: var(--primary-color);
-            color: white;
-            text-align: center;
-            border-radius: 6px;
-            text-decoration: none;
-            font-weight: 600;
-            transition: var(--transition);
-        }
-
-        .download-btn:hover {
-            background-color: #2980b9;
-            transform: translateY(-2px);
-        }
-
-        .upload-info {
-            background-color: var(--card-bg);
-            border-radius: 12px;
-            padding: 1.5rem;
-            box-shadow: var(--shadow);
-        }
-
-        .upload-info h2 {
-            margin-bottom: 1rem;
-            font-size: 1.5rem;
-            color: var(--primary-color);
-        }
-
-        .upload-info p {
-            margin-bottom: 1rem;
-        }
-
-        .upload-info ol, .upload-info ul {
-            margin: 1rem 0 1rem 1.5rem;
-        }
-
-        .upload-info li {
-            margin-bottom: 0.5rem;
-        }
-
-        a {
-            color: var(--primary-color);
-            text-decoration: none;
-            transition: var(--transition);
-        }
-
-        a:hover {
-            color: #2980b9;
-            text-decoration: underline;
-        }
-
-        footer {
-            background-color: var(--footer-bg);
-            color: white;
-            text-align: center;
-            padding: 1.5rem;
-            margin-top: auto;
-        }
-
-        .loading {
-            text-align: center;
-            padding: 2rem;
-            font-style: italic;
-            color: #777;
-        }
-
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            .file-grid {
-                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-            }
-            
-            .archive-stats {
-                flex-direction: column;
-            }
-            
-            h1 {
-                font-size: 1.5rem;
-            }
-            
-            .theme-toggle {
-                position: relative;
-                margin: 1rem auto;
-                left: 0;
-                top: 0;
-                transform: none;
-            }
-            
-            .header-content {
-                padding-top: 1rem;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .file-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .container {
-                padding: 0 1rem;
-            }
-            
-            .filter-container, .archive-stats, .files-container, .upload-info {
-                padding: 1rem;
-            }
-        }
-    </style>
+    <title>ARAB IPA/DEB Archive</title>
+    <link rel="icon" href="icon/Arab1.png" type="image/x-icon">
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <header>
-        <div class="header-content">
-            <button class="theme-toggle" id="darkModeToggle">
-                <span id="themeIcon">🌙</span>
-            </button>
-            <h1>أرشيف ARAB IPA/DEB</h1>
-            <p>مستودع لملفات IPAs و DEBs و DYLIBs متاحة للتحميل</p>
-        </div>
+        <h1>ARAB IPA/DEB Archive</h1>
+        <p>A repository of IPAs, DEBs, DYLIBs available for download</p>
     </header>
     
-    <div class="container">
+    <main>
         <div class="filter-container">
             <div class="search-container">
-                <input type="text" id="searchInput" placeholder="ابحث عن ملفات...">
+                <input type="text" id="searchInput" placeholder="Search for files...">
             </div>
             <div class="file-type-filter">
-                <button class="filter-btn active" data-type="all">جميع الملفات</button>
+                <button class="filter-btn active" data-type="all">All Files</button>
                 <button class="filter-btn" data-type="ipa">IPA</button>
                 <button class="filter-btn" data-type="deb">DEB</button>
                 <button class="filter-btn" data-type="dylib">DYLIB</button>
@@ -408,149 +28,41 @@
         
         <div class="archive-stats">
             <div class="stat-item">
-                <span>إجمالي الملفات:</span>
+                <span>Total Files: </span>
                 <span id="totalFilesCount">0</span>
             </div>
             <div class="stat-item">
-                <span>حجم الأرشيف:</span>
-                <span id="totalArchiveSize">0 بايت</span>
+                <span>Archive Size: </span>
+                <span id="totalArchiveSize">0 Bytes</span>
             </div>
         </div>
         
         <div class="files-container">
-            <h2>الملفات المتاحة</h2>
-            <div id="filesList" class="file-grid">
-                <!-- Files will be loaded here dynamically -->
+            <h2>Available Files</h2>
+            <div id="filesList" class="files-list">
+                <p class="loading">Loading files...</p>
             </div>
         </div>
         
         <div class="upload-info">
-            <h2>تواصل مع المطورين على تلغرام</h2>
-            <p>هذا المشروع صُمم للجميع، ويمكن لأي شخص أخذه وتعديله مع الحفاظ على حقوقنا أو التبرع لنا:</p>
+            <h2>add Developer on Telgram</h2>
+            <p>This project is designed for everyone and anyone can take it, modify it, and preserve our rights or donate to us:</p>
             <ol>
-                <li>X-Developer 🇸🇾 <a href="https://t.me/sh_hv" target="_blank">تلغرام</a></li>
-                <li>Negan Developer 🇸🇾 <a href="https://t.me/v505k" target="_blank">تلغرام</a></li>
-                <li>قناتنا <a href="https://t.me/ipaarab" target="_blank">تلغرام</a></li>
+                <li>X-Developer 🇸🇾 <a href="https://t.me/sh_hv" class="text-blue-600 hover:text-blue-800">Telgram</a></li>
+                <li>Negan Developer 🇸🇾 <a href="https://t.me/v505k" class="text-blue-600 hover:text-blue-800">Telgram</a></li>
+                <li>Our channel <a href="https://t.me/ipaarab" class="text-blue-600 hover:text-blue-800">Telgram</a></li>
             </ol>
-            <p>تم تطوير هذا الموقع بواسطة:</p>
+            <p>This site is developed and built by:</p>
             <ul>
-                <li><code>(فريق المطورين العرب)</code></li>
+                <li><code>(Arab Developers Team)</code></li>
             </ul>
         </div>
-    </div>
+    </main>
     
     <footer>
-        <p>&copy; 2025 @IPAARAB, جميع الحقوق محفوظة.</p>
+        <p>&copy; 2025 @IPAARAB, All rights reserved.</p>
     </footer>
     
-    <script>
-        // Dark Mode Toggle
-        const darkModeToggle = document.getElementById('darkModeToggle');
-        const themeIcon = document.getElementById('themeIcon');
-        const body = document.body;
-        
-        // Check for saved theme preference
-        const savedTheme = localStorage.getItem('theme');
-        if (savedTheme === 'dark') {
-            body.classList.add('dark-mode');
-            themeIcon.textContent = '☀️';
-        }
-        
-        darkModeToggle.addEventListener('click', () => {
-            body.classList.toggle('dark-mode');
-            
-            if (body.classList.contains('dark-mode')) {
-                localStorage.setItem('theme', 'dark');
-                themeIcon.textContent = '☀️';
-            } else {
-                localStorage.setItem('theme', 'light');
-                themeIcon.textContent = '🌙';
-            }
-        });
-        
-        // Sample file data
-        const files = [
-            { id: 1, name: 'WhatsApp++', type: 'ipa', size: 45.2, version: '2.24.8', icon: '📱' },
-            { id: 2, name: 'Instagram Rocket', type: 'ipa', size: 85.7, version: '313.0', icon: '📸' },
-            { id: 3, name: 'YouTube Cercube', type: 'ipa', size: 120.5, version: '19.03.1', icon: '🎬' },
-            { id: 4, name: 'SnapBreak', type: 'deb', size: 3.8, version: '2.0.1', icon: '👻' },
-            { id: 5, name: 'Watusi', type: 'dylib', size: 1.2, version: '1.3.7', icon: '💬' },
-            { id: 6, name: 'Spotify Premium', type: 'ipa', size: 155.3, version: '8.9.40', icon: '🎵' },
-            { id: 7, name: 'Filza File Manager', type: 'deb', size: 12.8, version: '4.0.0', icon: '📁' },
-            { id: 8, name: 'AppSync Unified', type: 'dylib', size: 0.8, version: '114.0', icon: '🔓' }
-        ];
-        
-        // Render files
-        function renderFiles(filesToRender) {
-            const filesList = document.getElementById('filesList');
-            filesList.innerHTML = '';
-            
-            if (filesToRender.length === 0) {
-                filesList.innerHTML = '<p class="loading">لا توجد ملفات مطابقة للبحث</p>';
-                return;
-            }
-            
-            filesToRender.forEach(file => {
-                const fileCard = document.createElement('div');
-                fileCard.className = 'file-card';
-                
-                fileCard.innerHTML = `
-                    <div class="file-icon">${file.icon}</div>
-                    <div class="file-info">
-                        <div class="file-name">${file.name}</div>
-                        <div class="file-meta">
-                            <span>الإصدار: ${file.version}</span>
-                            <span class="file-size">${file.size} ميجابايت</span>
-                        </div>
-                        <div class="file-type ${file.type}">${file.type.toUpperCase()}</div>
-                        <a href="#" class="download-btn">تحميل</a>
-                    </div>
-                `;
-                
-                filesList.appendChild(fileCard);
-            });
-        }
-        
-        // Filter files by type
-        const filterButtons = document.querySelectorAll('.filter-btn');
-        let currentFilter = 'all';
-        
-        filterButtons.forEach(button => {
-            button.addEventListener('click', () => {
-                filterButtons.forEach(btn => btn.classList.remove('active'));
-                button.classList.add('active');
-                currentFilter = button.dataset.type;
-                
-                const filteredFiles = currentFilter === 'all' 
-                    ? files 
-                    : files.filter(file => file.type === currentFilter);
-                
-                renderFiles(filteredFiles);
-            });
-        });
-        
-        // Search functionality
-        const searchInput = document.getElementById('searchInput');
-        
-        searchInput.addEventListener('input', () => {
-            const searchTerm = searchInput.value.toLowerCase();
-            
-            const filteredFiles = files.filter(file => 
-                file.name.toLowerCase().includes(searchTerm) || 
-                file.version.toLowerCase().includes(searchTerm)
-                .filter(file => currentFilter === 'all' || file.type === currentFilter);
-            
-            renderFiles(filteredFiles);
-        });
-        
-        // Initialize stats
-        document.getElementById('totalFilesCount').textContent = files.length;
-        
-        const totalSize = files.reduce((sum, file) => sum + file.size, 0);
-        document.getElementById('totalArchiveSize').textContent = `${totalSize.toFixed(1)} ميجابايت`;
-        
-        // Initial render
-        renderFiles(files);
-    </script>
+    <script src="script.js"></script>
 </body>
 </html>
