@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ARAB IPA/DEB Archive</title>
     <link rel="icon" href="icon/Arab1.png" type="image/x-icon">
-        <!-- IBMPlexArabic Font -->
+    <!-- IBMPlexArabic Font -->
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         /* ===== Base Styles & Reset ===== */
@@ -29,6 +29,40 @@
             --border-radius: 8px;
             --shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
             --transition: all 0.3s ease;
+            --card-bg: rgba(26, 29, 44, 0.7);
+            --header-bg: rgba(26, 29, 44, 0.9);
+            --text-primary: #f0f4f8;
+            --text-secondary: #aab7d0;
+            --section-bg: rgba(42, 47, 76, 0.6);
+            --border-color: rgba(90, 105, 143, 0.3);
+            --input-bg: rgba(26, 29, 44, 0.7);
+            --toggle-sun: #FFD700;
+            --toggle-moon: #E0E0E0;
+            --toggle-bg: rgba(58, 64, 95, 0.7);
+            --toggle-border: rgba(90, 105, 143, 0.3);
+            --background-gradient: linear-gradient(135deg, #1a1d2c 0%, #2a2f4c 100%);
+        }
+        
+        /* Day Mode Variables */
+        .day-mode {
+            --primary: #e1e8f0;
+            --secondary: #d1dae8;
+            --accent: #4a5f8c;
+            --highlight: #3a567d;
+            --light: #1a1d2c;
+            --dark: #f0f4f8;
+            --card-bg: rgba(240, 244, 248, 0.9);
+            --header-bg: rgba(225, 232, 240, 0.95);
+            --text-primary: #1a1d2c;
+            --text-secondary: #4a5568;
+            --section-bg: rgba(209, 218, 232, 0.8);
+            --border-color: rgba(74, 85, 104, 0.2);
+            --input-bg: rgba(240, 244, 248, 0.9);
+            --toggle-sun: #FFA500;
+            --toggle-moon: #4a5568;
+            --toggle-bg: rgba(240, 244, 248, 0.9);
+            --toggle-border: rgba(74, 85, 104, 0.3);
+            --background-gradient: linear-gradient(135deg, #d1dae8 0%, #e1e8f0 100%);
         }
         
         body {
@@ -524,8 +558,11 @@
 <body>
     <div class="container">
         <header>
-            <h1>ARAB IPA/DEB Archive</h1>
-            <p>A repository of IPAs, DEBs, DYLIBs available for download</p>
+            <div class="header-content">
+                <h1>ARAB IPA/DEB Archive</h1>
+                <p>A repository of IPAs, DEBs, DYLIBs available for download</p>
+                <div class="theme-toggle" id="themeToggle"></div>
+            </div>
         </header>
         
         <main>
@@ -549,6 +586,10 @@
                 <div class="stat-item">
                     <span>Archive Size: </span>
                     <span id="totalArchiveSize">2.7 GB</span>
+                </div>
+                <div class="stat-item">
+                    <span>Last Updated: </span>
+                    <span id="lastUpdated">June 7, 2025</span>
                 </div>
             </section>
             
@@ -628,6 +669,29 @@
     </div>
     
     <script>
+        // Theme toggle functionality
+        const themeToggle = document.getElementById('themeToggle');
+        const body = document.body;
+        
+        // Check for saved theme preference or respect OS preference
+        const savedTheme = localStorage.getItem('theme');
+        const prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)');
+        
+        if (savedTheme === 'day' || (!savedTheme && !prefersDarkScheme.matches)) {
+            body.classList.add('day-mode');
+        }
+        
+        themeToggle.addEventListener('click', () => {
+            body.classList.toggle('day-mode');
+            
+            // Save user preference
+            if (body.classList.contains('day-mode')) {
+                localStorage.setItem('theme', 'day');
+            } else {
+                localStorage.setItem('theme', 'night');
+            }
+        });
+        
         // Basic functionality for the filter buttons
         document.querySelectorAll('.filter-btn').forEach(button => {
             button.addEventListener('click', function() {
@@ -642,14 +706,31 @@
                 // Filter logic would go here
                 const filterType = this.getAttribute('data-type');
                 console.log(`Filtering by: ${filterType}`);
+                
+                // Filter file items based on type
+                document.querySelectorAll('.file-item').forEach(item => {
+                    const fileType = item.querySelector('.file-type').className.includes(filterType);
+                    if (filterType === 'all' || fileType) {
+                        item.style.display = 'flex';
+                    } else {
+                        item.style.display = 'none';
+                    }
+                });
             });
         });
         
         // Search functionality
         document.getElementById('searchInput').addEventListener('input', function() {
-            const searchTerm = this.value.toLowerCase();
-            console.log(`Searching for: ${searchTerm}`);
-            // Actual search implementation would go here
+            const searchTerm = this.value.toLowerCase().trim();
+            
+            document.querySelectorAll('.file-item').forEach(item => {
+                const fileName = item.querySelector('.file-name').textContent.toLowerCase();
+                if (fileName.includes(searchTerm)) {
+                    item.style.display = 'flex';
+                } else {
+                    item.style.display = 'none';
+                }
+            });
         });
         
         // Animate stats when they come into view
@@ -679,6 +760,13 @@
         // Start animation after page load
         window.addEventListener('load', function() {
             animateCounter(stats[0].element, stats[0].start, stats[0].end, stats[0].duration);
+        });
+        
+        // Set current date
+        document.getElementById('lastUpdated').textContent = new Date().toLocaleDateString('en-US', { 
+            year: 'numeric', 
+            month: 'long', 
+            day: 'numeric' 
         });
     </script>
 </body>
