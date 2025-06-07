@@ -47,6 +47,7 @@
             font-weight: 700;
             line-height: 1.2;
             margin-bottom: 1rem;
+            color: var(--text-primary);
         }
         
         h1 {
@@ -74,6 +75,7 @@
         
         p {
             margin-bottom: 1rem;
+            color: var(--text-secondary);
         }
         
         /* ===== Layout & Containers ===== */
